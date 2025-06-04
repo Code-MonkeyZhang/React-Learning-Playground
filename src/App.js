@@ -48,13 +48,13 @@ function App() {
       )}
 
       <div>
-        <button onClick={() => setShowModal(true)}>Show Modal</button>
+        <button onClick={() => setShowModal(true)}>Add New Event</button>
       </div>
 
       {showEvents && <EventList events={events} handleClick={handleClick} />}
 
       {showModal && (
-        <Modal handleClose={handleClose}>
+        <Modal handleClose={handleClose} isSalesModal={true}>
           <h2>10% Coupon Code!!</h2>
           <p>Use the Code Ninja10 at the checkout</p>
         </Modal>
