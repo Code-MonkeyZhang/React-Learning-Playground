@@ -1,33 +1,34 @@
 import "./NewEventForm.css";
 
-import { useState } from "react";
+import { useState,useRef } from "react";
 
 export default function NewEventForm({addEvent }) {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
 
-  // const handleChange = (e) => {
-  //   setTitle(e.target.value);
-  // };
+
+  const title = useRef()
+  const date = useRef()
+
+
 
   // 清空输入框内容
   const resetForm = () => {
-    setTitle('')
-    setDate('')
+    title.current.value = ""
+    date.current.value = ""
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(title,date)
 
     const event = {
-      title: title,
-      date: date,
+      title: title.current.value,
+      date: date.current.value,
       id: Math.floor(Math.random()*1000) // use random number to generate ID
     }
 
-    console.log(event)
+
     addEvent(event)
-    resetForm()
+    resetForm() 
   }
 
   return (
@@ -37,16 +38,14 @@ export default function NewEventForm({addEvent }) {
           <span>Title</span>
           <input 
             type="text" 
-            onChange={(e) => setTitle(e.target.value)} 
-            value = {title}  
+            ref={title}
           />
         </label>
         <label>
           <span>Event Data:</span>
           <input 
             type="date" 
-            onChange={(e) => setDate(e.target.value)}
-            value={date} 
+            ref={date}
           />
         </label>
         <button>Submit</button>
